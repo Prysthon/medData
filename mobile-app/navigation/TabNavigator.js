@@ -1,12 +1,12 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
 import { Ionicons } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native';
 
 // Importa as telas
 import HomeScreen from '../screens/HomeScreen';
-import Appointment from '../screens/Appointment';
+import HistoryScreen from '../screens/HistoryScreen'; // Nova tela de Histórico
+import Appointment from '../screens/Appointment';       // Tela de Marcar Consulta
 import Settings from '../screens/Settings';
 
 const Tab = createBottomTabNavigator();
@@ -15,15 +15,24 @@ const TabNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
-        headerShown: false, // Nas telas do tab, configuramos headers individualmente se necessário
+        headerShown: false, // Configuramos headers individualmente se necessário
         tabBarIcon: ({ focused, color, size }) => {
           let iconName = '';
-          if (route.name === 'Home') {
-            iconName = focused ? 'home' : 'home-outline';
-          } else if (route.name === 'Marcar') {
-            iconName = focused ? 'calendar' : 'calendar-outline';
-          } else if (route.name === 'Perfil') {
-            iconName = focused ? 'settings' : 'settings-outline';
+          switch (route.name) {
+            case 'Home':
+              iconName = focused ? 'home' : 'home-outline';
+              break;
+            case 'Histórico':
+              iconName = focused ? 'time' : 'time-outline';
+              break;
+            case 'Marcar':
+              iconName = focused ? 'calendar' : 'calendar-outline';
+              break;
+            case 'Perfil':
+              iconName = focused ? 'settings' : 'settings-outline';
+              break;
+            default:
+              iconName = 'ellipse';
           }
           return <Ionicons name={iconName} size={size} color={color} />;
         },
@@ -39,6 +48,20 @@ const TabNavigator = () => {
         options={{
           headerShown: true,
           headerTitle: 'Histórico Médico',
+          headerLeft: () => null,
+          headerRight: () => (
+            <TouchableOpacity style={{ marginRight: 15 }} onPress={() => console.log('Notificações clicadas')}>
+              <Ionicons name="notifications-outline" size={24} color="black" />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Tab.Screen 
+        name="Histórico"
+        component={HistoryScreen}
+        options={{
+          headerShown: true,
+          headerTitle: 'Histórico do Paciente',
           headerLeft: () => null,
           headerRight: () => (
             <TouchableOpacity style={{ marginRight: 15 }} onPress={() => console.log('Notificações clicadas')}>

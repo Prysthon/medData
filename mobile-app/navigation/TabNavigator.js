@@ -22,7 +22,7 @@ const TabNavigator = () => {
             iconName = focused ? 'home' : 'home-outline';
           } else if (route.name === 'Marcar') {
             iconName = focused ? 'calendar' : 'calendar-outline';
-          } else if (route.name === 'Settings') {
+          } else if (route.name === 'Perfil') {
             iconName = focused ? 'settings' : 'settings-outline';
           }
           return <Ionicons name={iconName} size={size} color={color} />;
@@ -56,7 +56,7 @@ const TabNavigator = () => {
         }}
       />
       <Tab.Screen 
-        name="Settings"
+        name="Perfil"
         component={Settings}
         options={{
           headerShown: true,

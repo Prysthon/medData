@@ -19,12 +19,11 @@ const TabNavigator = () => {
           let iconName = '';
           if (route.name === 'Home') {
             iconName = focused ? 'home' : 'home-outline';
-          } else if (route.name === 'Settings') {
+          } else if (route.name === 'Configurações') {
             iconName = focused ? 'settings' : 'settings-outline';
           }
           return <Ionicons name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: 'blue',
         tabBarInactiveTintColor: 'white',
         tabBarStyle: {
           backgroundColor: '#222',
@@ -45,7 +44,20 @@ const TabNavigator = () => {
           ),
         }}
       />
-      <Tab.Screen name="Settings" component={Settings} />
+      <Tab.Screen 
+        name="Configurações" 
+        component={Settings} 
+        options={{
+          headerShown: true,
+          headerTitle: 'Configurações',
+          headerLeft: () => null,
+          headerRight: () => (
+            <TouchableOpacity style={{ marginRight: 15 }} onPress={() => { console.log('Notificações clicadas'); }}>
+              <Ionicons name="notifications-outline" size={24} color="black" />
+            </TouchableOpacity>
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 };

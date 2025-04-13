@@ -1,11 +1,39 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+
+const settingsData = [
+  { id: '1', title: 'Dados da Conta', iconName: 'person-outline' },
+  { id: '2', title: 'Notificações', iconName: 'notifications-outline' },
+  { id: '3', title: 'Privacidade', iconName: 'lock-closed-outline' },
+  { id: '4', title: 'Idioma', iconName: 'language-outline' },
+  { id: '5', title: 'Sobre o App', iconName: 'information-circle-outline' },
+];
 
 const Settings = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Configurações</Text>
-      <Text>Aqui você poderá ajustar preferências e configurações do app.</Text>
+      <Text style={styles.headerTitle}>Configurações</Text>
+      <ScrollView style={styles.listContainer}>
+        {settingsData.map((item) => (
+          <TouchableOpacity
+            key={item.id}
+            style={styles.itemContainer}
+            onPress={() => console.log(`${item.title} clicado`)}
+          >
+            <View style={styles.itemLeft}>
+              <Ionicons
+                name={item.iconName}
+                size={24}
+                color="#007BFF"
+                style={styles.itemIcon}
+              />
+              <Text style={styles.itemTitle}>{item.title}</Text>
+            </View>
+            <Ionicons name="chevron-forward-outline" size={24} color="#ccc" />
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
     </View>
   );
 };
@@ -15,13 +43,33 @@ export default Settings;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: '#fff',
+    padding: 20,
   },
-  title: {
+  headerTitle: {
     fontSize: 22,
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginBottom: 20,
+  },
+  listContainer: {
+    flex: 1,
+  },
+  itemContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: '#eee',
+  },
+  itemLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  itemIcon: {
+    marginRight: 10,
+  },
+  itemTitle: {
+    fontSize: 16,
   },
 });

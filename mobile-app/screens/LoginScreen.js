@@ -6,7 +6,7 @@ const LoginScreen = ({ navigation }) => {
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    console.log("Email:", email, "Senha:", password);
+    navigation.navigate('Home'); // Ir para a tela principal
   };
 
   return (

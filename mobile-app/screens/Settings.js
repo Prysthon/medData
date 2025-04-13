@@ -10,7 +10,7 @@ const settingsData = [
   { id: '5', title: 'Sobre o App', iconName: 'information-circle-outline' },
 ];
 
-const Settings = () => {
+const Settings = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.headerTitle}>Configurações</Text>
@@ -34,6 +34,14 @@ const Settings = () => {
           </TouchableOpacity>
         ))}
       </ScrollView>
+
+      {/* Botão Sair */}
+      <TouchableOpacity
+        style={styles.logoutButton}
+        onPress={() => navigation.navigate('Login')}
+      >
+        <Text style={styles.logoutText}>Sair</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -71,5 +79,16 @@ const styles = StyleSheet.create({
   },
   itemTitle: {
     fontSize: 16,
+  },
+  logoutButton: {
+    marginTop: 20,
+    paddingVertical: 15,
+    alignItems: 'center',
+    borderTopWidth: 1,
+    borderTopColor: '#eee',
+  },
+  logoutText: {
+    fontSize: 16,
+    color: '#FF0000',
   },
 });

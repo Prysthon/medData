@@ -1,5 +1,3 @@
-// src/mocks/quickAccessData.js
-
 export const quickAccessItems = [
   {
     key: 'historico',
@@ -121,4 +119,19 @@ export const quickAccessItems = [
       },
     ],
   },
+  {
+    key: 'cirurgias',
+    label: 'Cirurgias',
+    cards: []
+  },
+  {
+    key: 'medicamentos',
+    label: 'Medicamentos Recorrentes',
+    cards: []
+  },
+  {
+    key: 'exames',
+    label: 'Exames',
+    cards: []
+  }
 ];

@@ -9,6 +9,9 @@ const app = express();
 app.use(express.json());
 
 // Rotas
+app.get('/test', (_request, response) => {
+  response.status(200).json('teste');
+});
 app.use('/', authRoutes);
 app.use('/protected', protectedRoutes);
 

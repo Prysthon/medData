@@ -15,7 +15,7 @@ async function connectDB() {
     `mongodb://${user}:${pass}@${MONGODB_HOST}:${port}/${db}?authSource=admin`;
 
   try {
-    console.log('iniciando')
+    console.log('iniciando: ', uri)
     await mongoose.connect(uri, {
       useNewUrlParser: true,
       useUnifiedTopology: true,

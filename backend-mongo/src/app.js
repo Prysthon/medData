@@ -1,5 +1,8 @@
 const express = require('express');
 
+const authRoutes = require('./routes/auth');
+
+
 const app = express();
 
 // Middlewares
@@ -10,8 +13,6 @@ app.get('/', (req, res) => {
   res.send('API working');
 });
 
-// aqui você poderia importar um router separado, ex:
-// const usersRouter = require('./routes/users');
-// app.use('/users', usersRouter);
+app.use('/register', authRoutes);
 
 module.exports = app;

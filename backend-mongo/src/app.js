@@ -1,7 +1,7 @@
 const express = require('express');
 
 const authRoutes = require('./routes/auth');
-
+const protectedRoutes = require('./routes/protected');
 
 const app = express();
 
@@ -9,10 +9,8 @@ const app = express();
 app.use(express.json());
 
 // Rotas
-app.get('/', (req, res) => {
-  res.send('API working');
-});
+app.use('/', authRoutes);
+app.use('/protected', protectedRoutes);
 
-app.use('/register', authRoutes);
 
 module.exports = app;

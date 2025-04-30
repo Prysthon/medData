@@ -1,4 +1,5 @@
 const { createUser } = require('../services/userService');
+const { authenticate } = require('../services/authService');
 
 async function register(req, res) {
   const { name, email, password } = req.body;
@@ -18,6 +19,24 @@ async function register(req, res) {
   }
 }
 
+async function login(req, res) {
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return res
+      .status(400)
+      .json({ error: 'Email and password are required.' });
+  }
+  try {
+    const { token } = await authenticate({ email, password });
+    return res.json({ token });
+  } catch (err) {
+    return res
+      .status(401)
+      .json({ error: 'Invalid email or password.' });
+  }
+}
+
 module.exports = {
   register,
+  login,
 };

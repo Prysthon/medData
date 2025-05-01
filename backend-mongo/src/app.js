@@ -3,7 +3,7 @@ const express = require('express');
 const authRoutes = require('./routes/auth');
 const protectedRoutes = require('./routes/protected');
 
-const connectDB = require('./database');
+const connectDB = require('./database/index');
 
 connectDB();   
 const app = express();

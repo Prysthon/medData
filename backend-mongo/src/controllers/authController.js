@@ -42,7 +42,7 @@ async function register(req, res) {
     // 5) Erro genérico
     return res
       .status(500)
-      .json({ error: err });
+      .json({ error: `erro: ${err}` });
   }
 }
 

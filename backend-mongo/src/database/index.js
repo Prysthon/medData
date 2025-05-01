@@ -2,27 +2,20 @@
 const mongoose = require('mongoose');
 
 async function connectDB() {
-  const {
-    MONGO_INITDB_ROOT_USERNAME: user,
-    MONGO_INITDB_ROOT_PASSWORD: pass,
-    MONGO_PORT: port,
-    DB_NAME: db,
-    MONGODB_HOST = 'localhost' 
-  } = process.env;
-
-  // monta a URI
-  const uri = process.env.MONGODB_URI ||
-    `mongodb://${user}:${pass}@${MONGODB_HOST}:${port}/${db}?authSource=admin`;
-
+  const uri = process.env.MONGODB_URI;
+  if (!uri) {
+    console.error('❌ MONGODB_URI não definida');
+    process.exit(1);
+  }
   try {
-    console.log('iniciando: ', uri)
+    console.log('Conectando ao MongoDB em', uri);
     await mongoose.connect(uri, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    console.log('✅ MongoDB connected');
+    console.log('✅ MongoDB conectado');
   } catch (err) {
-    console.error('❌ Error connecting to MongoDB:', err);
+    console.error('❌ Erro ao conectar ao MongoDB:', err);
     process.exit(1);
   }
 }

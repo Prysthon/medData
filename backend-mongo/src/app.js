@@ -1,7 +1,6 @@
 const express = require('express');
 
-const authRoutes = require('./routes/auth');
-const protectedRoutes = require('./routes/protected');
+const { userRouter, protectedRouter } = require('./routes')
 
 const connectDB = require('./database/index');
 
@@ -12,11 +11,9 @@ const app = express();
 app.use(express.json());
 
 // Rotas
-app.get('/', (_request, response) => {
-  response.status(200).json('api funcionando');
-});
-app.use('/', authRoutes);
-app.use('/protected', protectedRoutes);
+app.get('/', (_request, response) => { response.status(200).json('api funcionando') });
+app.use('/', userRouter);
+app.use('/protected', protectedRouter);
 
 
 module.exports = app;

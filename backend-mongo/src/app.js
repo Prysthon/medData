@@ -9,8 +9,8 @@ const connectDB = require('./database/index');
 connectDB();   
 const app = express();
 
-const allowedOrigin = process.env.FRONTEND_URL || 'http://localhost:5173';
-app.use(cors({ origin: allowedOrigin }));
+const allowedOrigin = (process.env.FRONTEND_URL || 'http://localhost:5173').replace(/\/$/, '');
+app.use(cors({ origin: allowedOrigin, credentials: true }));
 
 // Middlewares
 app.use(express.json());

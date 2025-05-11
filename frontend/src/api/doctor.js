@@ -1,14 +1,12 @@
 // src/api/doctor.js
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+const API_URL = import.meta.env.VITE_API_URL?.replace(/\/$/, '') || 'http://localhost:3000';
 
 // Cria instância do Axios com headers dinâmicos
 const api = axios.create({
   baseURL: API_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
+  headers: { 'Content-Type': 'application/json' },
 });
 
 // Interceptor para incluir token automaticamente
@@ -32,9 +30,7 @@ export async function getDoctors() {
 
 export async function getDoctorById(id) {
   try {
-    console.log(id)
     const res = await api.get(`/doctors/${id}`);
-    console.log(res)
     return res.data;
   } catch (err) {
     throw new Error(err.response?.data?.error || 'Falha ao buscar médico');

@@ -15,7 +15,6 @@ async function create(req, res) {
     const doctor = await createDoctor({ 
       name, email, password, crm, specialty, owner: req.userId 
     });
-    // não retornar a senha
     const { password: _, ...data } = doctor.toObject();
     res.status(201).json(data);
   } catch (err) {

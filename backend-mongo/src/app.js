@@ -1,13 +1,16 @@
 const express = require('express');
 
 const { errors } = require('celebrate');
-
+const cors = require('cors');
 const { userRouter, protectedRouter, doctorRouter } = require('./routes')
 
 const connectDB = require('./database/index');
 
 connectDB();   
 const app = express();
+
+const allowedOrigin = process.env.FRONTEND_URL || 'http://localhost:5173';
+app.use(cors({ origin: allowedOrigin }));
 
 // Middlewares
 app.use(express.json());

@@ -5,7 +5,7 @@ const putDoctorSchema = {
   [Segments.BODY]: Joi.object().keys({
     name: Joi.string().required(),
     email: Joi.string().email().required(),
-    password: Joi.string().min(4).required(),
+    password: Joi.string().min(4),
     crm: Joi.string().required(),
     specialty: Joi.string().required()
   })

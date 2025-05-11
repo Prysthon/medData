@@ -13,9 +13,10 @@ const api = axios.create({
 
 // Interceptor para incluir token automaticamente
 api.interceptors.request.use(config => {
-  const token = localStorage.getItem('token');
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
+  // só acessa localStorage no cliente
+  if (typeof window !== 'undefined') {
+    const token = window.localStorage.getItem('token');
+    if (token) config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
 });

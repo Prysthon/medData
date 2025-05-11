@@ -20,9 +20,12 @@ export default function Login() {
     setLoading(true);
     try {
       const { token } = await loginUser(form);
-      localStorage.setItem('token', token);
+      // só acessa localStorage no cliente
+      if (typeof window !== 'undefined') {
+        window.localStorage.setItem('token', token);
+      }
       toast.success('Login realizado com sucesso!');
-      navigate('/dashboard'); // já vai para a nova rota
+      navigate('/dashboard');
     } catch (err) {
       toast.error(err.message);
     } finally {

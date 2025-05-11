@@ -27,8 +27,14 @@ export default function Dashboard() {
   const [editData, setEditData] = useState(null);
 
   useEffect(() => {
-    if (!localStorage.getItem('token')) return navigate('/login');
-    loadAll();
+    // só roda no cliente
+    if (typeof window === 'undefined') return;
+    const t = window.localStorage.getItem('token');
+    if (!t) {
+      navigate('/login');
+    } else {
+      loadAll();
+    }
   }, [navigate]);
 
   const loadAll = async () => {
